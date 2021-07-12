@@ -95,7 +95,7 @@ func (h *Router) QueryOrderByNo() gin.HandlerFunc {
 			h.httpErr(c, http.StatusBadGateway, err.Error())
 			return
 		}
-		if order != nil {
+		if order == nil {
 			h.httpErr(c, http.StatusBadRequest, "未查询到订单")
 			return
 		}
@@ -165,7 +165,7 @@ func (h *Router) QueryLikeOrder() gin.HandlerFunc {
 			h.httpErr(c, http.StatusBadRequest, err.Error())
 			return
 		}
-		if orders != nil {
+		if orders == nil {
 			h.httpErr(c, http.StatusBadRequest, "未查询到结果")
 			return
 		}
@@ -189,7 +189,7 @@ func (h *Router) QueryOrderList() gin.HandlerFunc {
 			h.httpErr(c, http.StatusBadRequest, err.Error())
 			return
 		}
-		if orders != nil {
+		if orders == nil {
 			h.httpErr(c, http.StatusBadRequest, "未查询到结果")
 			return
 		}
@@ -200,7 +200,7 @@ func (h *Router) QueryOrderList() gin.HandlerFunc {
 
 func (h *Router) Upload() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		no := c.Param("order_no")
+		no := c.PostForm("order_no")
 
 		// 单文件
 		file, err := c.FormFile("file")//想处理但是file没获得是nil吗？
@@ -236,7 +236,7 @@ func (h *Router) Download() gin.HandlerFunc {
 			h.httpErr(c, http.StatusBadRequest, err.Error())
 			return
 		}
-		if order != nil {
+		if order == nil {
 			h.httpErr(c, http.StatusBadRequest, "未查询到订单")
 			return
 		}

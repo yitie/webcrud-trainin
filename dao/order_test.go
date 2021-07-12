@@ -49,11 +49,10 @@ func (s *OrderTestSuite) SetupSuite() {
 
 func (s *OrderTestSuite) SetupTest() {
 	s.T().Log("SetupTest")
-
 }
 
 func (s *OrderTestSuite) TestNewOrder(t *testing.T) {
-	//s.T().Log("TestAddNewOrder")
+	s.T().Log("TestAddNewOrder")
 	require.NoError(s.T(), s.dao.NewOrder(s.order))
 }
 

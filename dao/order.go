@@ -28,7 +28,7 @@ func (o *orderDAO) NewOrder(order *model.Order) error {
 
 //凭借订单号更新细节
 func (o *orderDAO) UpdateOrderByOrderNo(no string, data map[string]interface{}) error {
-	return o.db.Model(&model.Order{}).Where("order_id=?", no).Updates(data).Error
+	return o.db.Model(&model.Order{}).Where("order_no=?", no).Updates(data).Error
 }
 
 //获取所有订单

@@ -11,7 +11,7 @@ func main() {
 	g := router.NewEngine(server.NewServer(
 		&model.Order{},
 	))
-	if err := g.Run(":8888"); err != nil {
+	if err := g.Run(); err != nil {
 		panic(err)
 	}
 }

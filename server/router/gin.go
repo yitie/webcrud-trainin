@@ -3,6 +3,7 @@ package router
 import (
 	"webOrder/service"
 
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +14,7 @@ type Router struct {
 func NewEngine(h *Router) *gin.Engine {
 	r := gin.New()
 	gin.SetMode(gin.ReleaseMode)
+	r.Use(Logger())
 	//resfulapi
 	r.GET("/order/:order_no", h.QueryOrderByNo())
 	r.POST("/order/", h.NewOrder())
