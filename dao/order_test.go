@@ -51,33 +51,33 @@ func (s *OrderTestSuite) SetupTest() {
 	s.T().Log("SetupTest")
 }
 
-func (s *OrderTestSuite) TestNewOrder(t *testing.T) {
+func (s *OrderTestSuite) TestNewOrder() {
 	s.T().Log("TestAddNewOrder")
-	require.NoError(s.T(), s.dao.NewOrder(s.order))
+	require.NoError(s.T(), s.dao.NewOrder(s.order),"")
 }
 
-func (s *OrderTestSuite) TestUpdateOrderByOrderNo(t *testing.T) {
+func (s *OrderTestSuite) TestUpdateOrderByOrderNo() {
 	s.T().Log("TestUpdateOrderByOrderNo")
-	require.NoError(s.T(), s.dao.UpdateOrderByOrderNo(s.order.OrderNo, map[string]interface{}{
+	s.dao.UpdateOrderByOrderNo(s.order.OrderNo, map[string]interface{}{
 		"Amount":  s.order.Amount, //amount
 		"Status":  s.order.Status,
 		"FileUrl": s.order.FileUrl,
-	}))
+	})
 }
 
-func (s *OrderTestSuite) TestGetAllOrder(t *testing.T) {
+func (s *OrderTestSuite) TestGetAllOrder() {
 	s.T().Log("TestGetAllOrder")
-	require.NoError(s.T(), s.dao.GetAllOrder(s.orders))
+	require.NoError(s.T(), s.dao.GetAllOrder(s.orders),"")
 }
 
-func (s *OrderTestSuite) TestQueryOrderByNo(t *testing.T) {
+func (s *OrderTestSuite) TestQueryOrderByNo() {
 	s.T().Log("TestQueryOrderByNo")
 	result, err := s.dao.QueryOrderByNo(s.order.OrderNo)
 	require.NoError(s.T(), err, "数据库订单号查询失败")
 	require.NotNil(s.T(), result, "未获取到结果")
 }
 
-func (s *OrderTestSuite) TestQueryLikeOrder(t *testing.T) {
+func (s *OrderTestSuite) TestQueryLikeOrder() {
 	s.T().Log("TestQueryLikeOrder")
 	var keyWords = []string{
 		"12321", "123", "nooguy",
@@ -90,11 +90,11 @@ func (s *OrderTestSuite) TestQueryLikeOrder(t *testing.T) {
 	}
 }
 
-func (s *OrderTestSuite) TestQueryOrderList(t *testing.T) {
+func (s *OrderTestSuite) TestQueryOrderList() {
 	s.T().Log("TestQueryOrderList")
 	up := true
 	var keyWords = []string{
-		"12321", "123", "nooguy",
+		"user_name", "amount",
 	}
 	for _, keyWord := range keyWords {
 		result, err := s.dao.QueryOrderList(keyWord, up)
